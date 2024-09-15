@@ -6,7 +6,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "CONNECTIONSTRING": "Host/=dpg-cr8lc0lsvqrc739brc40-a.oregon-postgres.render.com;Port/=5432;Database/=nothingdb;Username/=nothingdb_user;Password/=53ZCRVd80Qyf7JBUcv3McOUxGCnvOT1K;"
+        "CONNECTIONSTRING": "Host=dpg-cr8lc0lsvqrc739brc40-a.oregon-postgres.render.com;Port=5432;Database=nothingdb;Username=nothingdb_user;Password=53ZCRVd80Qyf7JBUcv3McOUxGCnvOT1K;"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5294"
