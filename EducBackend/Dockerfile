@@ -8,16 +8,16 @@ EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src/EducBackend
+WORKDIR /EducBackend
 COPY ["EducBackend.csproj", "."]
 
-WORKDIR /src/Domain
+WORKDIR /Domain
 COPY ["Domain.csproj", "."]
 
-WORKDIR /src/Infra.data
+WORKDIR /Infra.data
 COPY ["Infra.data.csproj", "."]
 
-WORKDIR /src/Service
+WORKDIR /Service
 COPY ["Service.csproj", "."]
 
 RUN dotnet restore "./EducBackend.csproj"
