@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copie os arquivos .csproj e restaure as dependências para cada projeto
-COPY ./EduckBackend/EduckBackend.csproj ./EduckBackend/
+COPY ./EducBackend/EducBackend.csproj ./EducBackend/
 COPY ./Domain/Domain.csproj ./Domain/
 COPY ./Service/Service.csproj ./Service/
 COPY ./Infra.Data/Infra.data.csproj ./Infra.Data/
@@ -26,4 +26,4 @@ COPY --from=build /app/out .
 EXPOSE 80
 
 # Defina o comando de inicialização
-ENTRYPOINT ["dotnet", "EduckBackend.dll"]
+ENTRYPOINT ["dotnet", "EducBackend.dll"]
