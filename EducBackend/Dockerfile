@@ -6,7 +6,7 @@ WORKDIR /app
 COPY ./EducBackend/EducBackend.csproj ./EducBackend/
 COPY ./Domain/Domain.csproj ./Domain/
 COPY ./Service/Service.csproj ./Service/
-COPY ./Infra.Data/Infra.data.csproj ./Infra.Data/
+COPY ./Infra.data/Infra.data.csproj ./Infra.data/
 
 # Restaure as dependências (este comando vai resolver as dependências entre os projetos)
 RUN dotnet restore ./EducBackend/EducBackend.csproj
