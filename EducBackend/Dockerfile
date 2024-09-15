@@ -1,35 +1,29 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
+# Etapa de construção
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /EducBackend
-COPY ["EducBackend.csproj", "."]
-
-WORKDIR /Domain
-COPY ["Domain.csproj", "."]
-
-WORKDIR /Infra.data
-COPY ["Infra.data.csproj", "."]
-
-WORKDIR /Service
-COPY ["Service.csproj", "."]
-
-RUN dotnet restore "./EducBackend.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./EducBackend.csproj" -c $BUILD_CONFIGURATION -o /app/build
-
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./EducBackend.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "EducBackend.dll"]
+
+# Copie os arquivos .csproj e restaure as dependências para cada projeto
+COPY ./EduckBackend/EduckBackend.csproj ./EduckBackend/
+COPY ./Domain/Domain.csproj ./Domain/
+COPY ./Service/Service.csproj ./Service/
+COPY ./Infra.Data/Infra.Data.csproj ./Infra.Data/
+
+# Restaure as dependências (este comando vai resolver as dependências entre os projetos)
+RUN dotnet restore ./EduckBackend/EduckBackend.csproj
+
+# Copie todos os arquivos do projeto para a imagem
+COPY . .
+
+# Compile o projeto no modo Release
+RUN dotnet publish ./EduckBackend/EduckBackend.csproj -c Release -o /app/out
+
+# Etapa de execução
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/out .
+
+# Exponha a porta da aplicação
+EXPOSE 80
+
+# Defina o comando de inicialização
+ENTRYPOINT ["dotnet", "EduckBackend.dll"]
