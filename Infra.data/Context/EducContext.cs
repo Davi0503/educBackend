@@ -25,15 +25,15 @@ namespace Infra.data.Context
         private void ConvertToUtc()
         {
             var entries = ChangeTracker.Entries()
-                .Where(e => e.Entity is IBaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
+                .Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
 
             foreach (var entityEntry in entries)
             {
-                ((IBaseEntity)entityEntry.Entity).Updated_At = DateTime.UtcNow;
+                ((BaseEntity)entityEntry.Entity).Updated_At = DateTime.UtcNow;
  
                 if (entityEntry.State == EntityState.Added)
                 {
-                    ((IBaseEntity)entityEntry.Entity).Created_At = DateTime.UtcNow;
+                    ((BaseEntity)entityEntry.Entity).Created_At = DateTime.UtcNow;
                 }
             }
         }

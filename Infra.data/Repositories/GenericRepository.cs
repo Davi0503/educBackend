@@ -44,7 +44,7 @@ namespace Infra.data.Repositories
         public async Task Update(TEntity entity)
         {
             context.Set<TEntity>().Update(entity);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

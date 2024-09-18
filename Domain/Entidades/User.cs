@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entidades
 {
-    public class User : IBaseEntity
+    public class User : BaseEntity
     {
 
         public int Id { get; set; }
@@ -18,16 +18,11 @@ namespace Domain.Entidades
         [Required]
         public string Nome { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
+        [Required]
         public string Senha { get; set; }
-        public bool Ativo { get; set; }
-        public DateTime Created_At { get; set; } 
-        public DateTime Updated_At { get; set; }
-
-
-
-
 
     }
 }

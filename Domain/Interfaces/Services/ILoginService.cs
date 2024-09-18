@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entidades.Dtos.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Domain.Interfaces.Services
 {
     public interface ILoginService
     {
-        public Task teste();
+        public Task Login(LoginRequest login);
     }
 }

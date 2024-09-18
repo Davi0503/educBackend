@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using Domain.Entidades.Dtos.Login;
+using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Infra.data.Repositories;
 using System;
@@ -11,15 +12,15 @@ namespace Service.Services
 {
     public class LoginService : ILoginService
     {
-        private readonly ILoginRepository _loginRepository;
+        private readonly IUserRepository _userRepository;
 
-        public LoginService(ILoginRepository loginRepository)
+        public LoginService(IUserRepository userRepository)
         {
-                _loginRepository = loginRepository;
+                _userRepository = userRepository;
         }
-        public async Task teste()
+        public async Task Login(LoginRequest login)
         {
-             await _loginRepository.Create(new Domain.Entidades.User() { Ativo= true, Nome= "Davi", Email="davi@123", Senha="123", Created_At = DateTime.Now, Updated_At = DateTime.Now});
+             throw new NotImplementedException();
             
         }
     }

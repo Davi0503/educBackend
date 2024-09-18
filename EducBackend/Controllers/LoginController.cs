@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Services;
+﻿using Domain.Entidades.Dtos.Login;
+using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EducBackend.Controllers
@@ -8,17 +9,15 @@ namespace EducBackend.Controllers
     public class LoginController : Controller
     {
         private readonly ILoginService _loginService;
-        private readonly IConfiguration _configuration;
-        public LoginController(ILoginService loginService, IConfiguration configuration)
+        public LoginController(ILoginService loginService)
         {
             _loginService = loginService;
-            _configuration = configuration;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Post()
-            {
-            await _loginService.teste();
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] LoginRequest data)
+        {
+            await _loginService.Login(data);
             return Ok();
         }
         
